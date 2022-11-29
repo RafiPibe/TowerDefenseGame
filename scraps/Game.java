@@ -58,6 +58,7 @@ public class Game extends JFrame implements Runnable {
 	
 	// loopGame will make sure to balance the game so that slow / fast devices doesn't matter
 	private void loopGame() {
+		//render
 		while(true) {
 			if(System.nanoTime() - lastUpdate >= updateDuration) {
 				updateGame();
@@ -100,6 +101,7 @@ public class Game extends JFrame implements Runnable {
 	@Override
 	public void run() {
 		//render
+		
 		//update
 		
 		//checking FPS and UPS
