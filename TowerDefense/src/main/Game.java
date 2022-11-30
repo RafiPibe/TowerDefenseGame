@@ -6,42 +6,66 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+import inputs.KeyboardInputs;
+import inputs.MouseInputs;
+import scenes.Menu;
+import scenes.Playing;
+import scenes.Settings;
+
 public class Game extends JFrame implements Runnable {
 	
 	private GameScreen gameScreen;
-	private BufferedImage img;
-	
 	private Thread gameThread;
 	
 	// FPS and UPS Cap
 	private final double FPSCap = 120.0;
 	private final double UPSCap = 60.0;
 	
+	private KeyboardInputs keyboardInputs;
+	private MouseInputs mouseInputs;
+	
+	// Classes
+	private Render render;
+	private Menu menu;
+	private Playing playing;
+	private Settings settings;
+	
 	// The game window
 	public Game() {
 		
-		importImg();
-		
-		setSize(640,640);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
-		gameScreen = new GameScreen(img);
+		initClasses();
+		
+		
 		add(gameScreen);
+		pack();
+		
 		setVisible(true);
 	}
 	
-	private void importImg() {
-		InputStream is = getClass().getResourceAsStream("/sprite.png");
+	private void initClasses() {
+		render = new Render(this);
+		gameScreen = new GameScreen(this);
+		menu = new Menu(this);
+		playing = new Playing(this);
+		settings = new Settings(this);
 		
-		// try to import the image
-		try {
-			img = ImageIO.read(is);
-		} catch (IOException e) {
-			//if it goes wrong then it will print an error message
-			e.printStackTrace();
-		}
 	}
+
+	private void initInputs() {
+		keyboardInputs = new KeyboardInputs();
+		mouseInputs = new MouseInputs();
+		
+		addMouseListener(mouseInputs);
+		addMouseMotionListener(mouseInputs);
+		
+		addKeyListener(keyboardInputs);
+		
+		requestFocus();
+	}
+	
 	
 	private void start() {
 		gameThread = new Thread(this) {};
@@ -55,6 +79,7 @@ public class Game extends JFrame implements Runnable {
 	// main function
 	public static void main(String[] args) {
 		Game game = new Game();
+		game.initInputs();
 		game.start();
 	}
 
@@ -72,19 +97,23 @@ public class Game extends JFrame implements Runnable {
 		int frames = 0;
 		int updates = 0;
 		
+		long currentTime;
+		
 		// Game loop
 		while(true) {
+			currentTime = System.nanoTime();
+			
 			//render
-			if(System.nanoTime() - lastFrame >= frameDuration) {	
-				lastFrame = System.nanoTime();
+			if(currentTime - lastFrame >= frameDuration) {	
+				lastFrame = currentTime;
 				repaint();
 				frames++;
 			}
 			
 			//update
-			if(System.nanoTime() - lastUpdate >= updateDuration) {
+			if(currentTime - lastUpdate >= updateDuration) {
 				updateGame();
-				lastUpdate = System.nanoTime();
+				lastUpdate = currentTime;
 				updates++;
 			}
 			
@@ -97,4 +126,23 @@ public class Game extends JFrame implements Runnable {
 			}
 		}
 	}
+	
+	// Getter Setter
+	public Render getRender() {
+		return render;
+	}
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+	public Playing getPlaying() {
+		return playing;
+	}
+
+	public Settings getSettings() {
+		return settings;
+	}
+
+	
 }
