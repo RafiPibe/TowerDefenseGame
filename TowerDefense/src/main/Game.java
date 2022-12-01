@@ -21,8 +21,7 @@ public class Game extends JFrame implements Runnable {
 	private final double FPSCap = 120.0;
 	private final double UPSCap = 60.0;
 	
-	private KeyboardInputs keyboardInputs;
-	private MouseInputs mouseInputs;
+	
 	
 	// Classes
 	private Render render;
@@ -33,19 +32,21 @@ public class Game extends JFrame implements Runnable {
 	// The game window
 	public Game() {
 		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
-		
 		initClasses();
 		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+		setResizable(false);
 		
 		add(gameScreen);
 		pack();
 		
 		setVisible(true);
+		
 	}
 	
 	private void initClasses() {
+		
 		render = new Render(this);
 		gameScreen = new GameScreen(this);
 		menu = new Menu(this);
@@ -53,34 +54,27 @@ public class Game extends JFrame implements Runnable {
 		settings = new Settings(this);
 		
 	}
-
-	private void initInputs() {
-		keyboardInputs = new KeyboardInputs();
-		mouseInputs = new MouseInputs();
-		
-		addMouseListener(mouseInputs);
-		addMouseMotionListener(mouseInputs);
-		
-		addKeyListener(keyboardInputs);
-		
-		requestFocus();
-	}
 	
 	
 	private void start() {
+		
 		gameThread = new Thread(this) {};
 		gameThread.start();
+		
 	}
 
 	private void updateGame() {
+		
 		//System.out.println("Game Updated.");
 	}
 
 	// main function
 	public static void main(String[] args) {
+		
 		Game game = new Game();
-		game.initInputs();
+		game.gameScreen.initInputs();;
 		game.start();
+		
 	}
 
 	@Override
