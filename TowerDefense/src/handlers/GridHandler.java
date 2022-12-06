@@ -19,10 +19,10 @@ public class GridHandler {
 	}
 
 	private void createGrid() {
-		
-		grids.add(GRASS = new Grid(getSprite(8, 1)));
-		grids.add(WATER = new Grid(getSprite(0, 6)));
-		grids.add(PATH = new Grid(getSprite(9, 0)));
+		int id = 0;
+		grids.add(GRASS = new Grid(getSprite(8, 1), id++, "Grass"));
+		grids.add(WATER = new Grid(getSprite(0, 6), id++, "Water"));
+		grids.add(PATH = new Grid(getSprite(9, 0), id++, "Path"));
 		
 	}
 
@@ -31,6 +31,10 @@ public class GridHandler {
 	}
 	
 	// Getter Setter
+	public Grid getGrid(int id) {
+		return grids.get(id);
+	}
+	
 	public BufferedImage getSprite(int id) {
 		return grids.get(id).getSprite();
 	}
