@@ -18,6 +18,8 @@ public class MouseInputs implements MouseListener, MouseMotionListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getButton() == MouseEvent.BUTTON1) {
+			
+			// For debugging
 			System.out.println("M1 Pos: " + e.getX() + "," + e.getY());
 			
 			switch(GameStates.gameState) {
@@ -85,7 +87,20 @@ public class MouseInputs implements MouseListener, MouseMotionListener{
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
+		switch(GameStates.gameState) {
+		case MENU:
+			game.getMenu().mouseDragged(e.getX(), e.getY());
+			break;
+		case PLAYING:
+			game.getPlaying().mouseDragged(e.getX(), e.getY());
+			break;
+		case SETTINGS:
+			game.getSettings().mouseDragged(e.getX(), e.getY());
+			break;
+		default:
+			break;
 		
+		}
 	}
 
 	@Override
