@@ -129,4 +129,9 @@ public class Menu extends GameScene implements SceneMethods {
 		bQuit.resetBool();
 		
 	}
+
+	@Override
+	public void mouseDragged(int x, int y) {
+		
+	}
 }
