@@ -3,29 +3,31 @@ package scenes;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import guii.BottomBar;
 import guii.Buttons;
 import handlers.GridHandler;
 import handlers.WorldBuilder;
 import main.Game;
+import obj.Grid;
+
 import static main.GameStates.*;
 
-public class Playing extends GameScene implements SceneMethods{
+public class Playing extends GameScene implements SceneMethods {
 
 	private int[][] world;
 	private GridHandler gridHandler;
-	private Buttons bMenu;
+	private Grid selectedGrid;
+	private BottomBar bottomBar;
+	private int mouseX, mouseY, lastGridX, lastGridY, lastGridId;
+	private boolean drawSelected = false;
 	
 	public Playing(Game game) {
 		super(game);
 		
-		initButtons();
 		world = WorldBuilder.getWorldData();
 		gridHandler = new GridHandler();
+		bottomBar = new BottomBar(0, 640, 640, 100, this);
 		
-	}
-
-	private void initButtons() {
-		bMenu = new Buttons("Menu", 2, 2, 100, 30);
 	}
 
 	@Override
@@ -37,40 +39,87 @@ public class Playing extends GameScene implements SceneMethods{
 				g.drawImage(gridHandler.getSprite(id), x * 32, y * 32, null);
 			}
 		}
-		
-		drawButtons(g);
+		bottomBar.draw(g);
+		drawSelectedGrid(g);
 	}
 
-	private void drawButtons(Graphics g) {
-		bMenu.draw(g);
+	
+	private void drawSelectedGrid(Graphics g) {
+		if(selectedGrid != null && drawSelected) {
+			g.drawImage(selectedGrid.getSprite(), mouseX, mouseY, 32, 32, null);
+		}
+	}
+	
+	public void setSelectedGrid(Grid grid) {
+		this.selectedGrid = grid;
+		drawSelected = true;
 	}
 
+	// Getter
+	public GridHandler getGridHandler() {
+		return gridHandler;
+	}
+	
+	// Mouse Inputs
 	@Override
 	public void mouseClicked(int x, int y) {
-		if (bMenu.getBounds().contains(x, y)) {
-			SetGameState(MENU);
+		if(y >= 640) {
+			bottomBar.mouseClicked(x, y);
+		} else {
+			changeGrid(mouseX, mouseY);
 		}
 	}
 
+	private void changeGrid(int x, int y) {
+		if(selectedGrid != null) {
+			int gridX = x / 32;
+			int gridY = y / 32;
+		
+			if(lastGridX == gridX && lastGridY == gridY && lastGridId == selectedGrid.getId()) {
+				return;
+			}
+			
+			lastGridX = gridX;
+			lastGridY = gridY;
+			
+			world[gridY][gridX] = selectedGrid.getId();
+		}
+	}
+
+
+
 	@Override
 	public void mouseMoved(int x, int y) {
-		bMenu.setMouseOver(false);
-		
-		if (bMenu.getBounds().contains(x, y)) {
-			bMenu.setMouseOver(true);
+		if(y >= 640) {
+			bottomBar.mouseMoved(x, y);
+			drawSelected = false;
+		} else {
+			drawSelected = true;
+			mouseX = (x / 32) * 32;
+			mouseY = (y / 32) * 32;
 		}
 	}
 	
 	@Override
 	public void mousePressed(int x, int y) {
-		if (bMenu.getBounds().contains(x, y)) {
-			bMenu.setMousePressed(true);
+		if(y >= 640) {
+			bottomBar.mousePressed(x, y);
 		}
 	}
 
 	@Override
 	public void mouseReleased(int x, int y) {
-		bMenu.resetBool();
-		
+		bottomBar.mouseReleased(x, y);
+	}
+
+
+
+	@Override
+	public void mouseDragged(int x, int y) {
+		if (y >= 640) {
+			
+		} else {
+			changeGrid(x, y);
+		}
 	}
 }
