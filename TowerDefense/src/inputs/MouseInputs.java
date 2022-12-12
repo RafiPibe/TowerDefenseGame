@@ -1,6 +1,5 @@
 package inputs;
 
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -32,6 +31,9 @@ public class MouseInputs implements MouseListener, MouseMotionListener{
 			case SETTINGS:
 				game.getSettings().mouseClicked(e.getX(), e.getY());
 				break;
+			case EDITOR:
+				game.getEditor().mouseClicked(e.getX(), e.getY());
+				break;
 			default:
 				break;
 			
@@ -51,6 +53,9 @@ public class MouseInputs implements MouseListener, MouseMotionListener{
 		case SETTINGS:
 			game.getSettings().mousePressed(e.getX(), e.getY());
 			break;
+		case EDITOR:
+			game.getEditor().mousePressed(e.getX(), e.getY());
+			break;
 		default:
 			break;
 		
@@ -68,6 +73,9 @@ public class MouseInputs implements MouseListener, MouseMotionListener{
 			break;
 		case SETTINGS:
 			game.getPlaying().mouseReleased(e.getX(), e.getY());
+			break;
+		case EDITOR:
+			game.getEditor().mouseReleased(e.getX(), e.getY());
 			break;
 		default:
 			break;
@@ -97,6 +105,9 @@ public class MouseInputs implements MouseListener, MouseMotionListener{
 		case SETTINGS:
 			game.getSettings().mouseDragged(e.getX(), e.getY());
 			break;
+		case EDITOR:
+			game.getEditor().mouseDragged(e.getX(), e.getY());
+			break;
 		default:
 			break;
 		
@@ -114,6 +125,9 @@ public class MouseInputs implements MouseListener, MouseMotionListener{
 			break;
 		case SETTINGS:
 			game.getSettings().mouseMoved(e.getX(), e.getY());
+			break;
+		case EDITOR:
+			game.getEditor().mouseMoved(e.getX(), e.getY());
 			break;
 		default:
 			break;
