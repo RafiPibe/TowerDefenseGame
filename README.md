@@ -59,7 +59,7 @@ In my final project in Object Oriented Programming, I’m attempting to make a g
     Line 21<br>
     <br>
     
-• Exception Handing<br>
+✅ Exception Handing<br>
     (src\helperMethods\LoadSave.java)<br>
     Line 18-31<br>
     Line 34-32<br>
@@ -73,7 +73,9 @@ In my final project in Object Oriented Programming, I’m attempting to make a g
 • Abstract Class<br>
 <br>
 
-• Generics<br>
+✅ Generics<br>
+    (src\handlers\UtilitiesHandler.java)<br>
+    Line 6<br>
 <br>
 
 • Collection<br>
