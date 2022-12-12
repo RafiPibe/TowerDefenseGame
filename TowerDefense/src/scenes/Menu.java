@@ -1,31 +1,17 @@
 package scenes;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Random;
-
-import javax.imageio.ImageIO;
 
 import guii.Buttons;
 import main.Game;
 import static main.GameStates.*;
 
 public class Menu extends GameScene implements SceneMethods {
-
-	private BufferedImage img;
-	private ArrayList<BufferedImage> sprites = new ArrayList<>();
-	private Random random;
 	
-	private Buttons bPlaying, bSettings, bQuit;
+	private Buttons bPlaying, bEdit, bSettings, bQuit;
 	
 	public Menu(Game game) {
 		super(game);
-		random = new Random();
-		importImg();
-		loadSprites();
 		initButtons();
 	}
 
@@ -38,8 +24,9 @@ public class Menu extends GameScene implements SceneMethods {
 		int ySpace = 100;
 		
 		bPlaying = new Buttons("Play", x, y, widthButton, heightButton);
-		bSettings = new Buttons("Settings", x, y + ySpace, widthButton, heightButton);
-		bQuit = new Buttons("Quit", x, y + ySpace * 2, widthButton, heightButton);
+		bEdit = new Buttons("Edit", x, y + ySpace, widthButton, heightButton);
+		bSettings = new Buttons("Settings", x, y + ySpace * 2, widthButton, heightButton);
+		bQuit = new Buttons("Quit", x, y + ySpace * 3, widthButton, heightButton);
 	}
 
 	@Override
@@ -49,39 +36,19 @@ public class Menu extends GameScene implements SceneMethods {
 
 	private void drawButtons(Graphics g) {
 		bPlaying.draw(g);
+		bEdit.draw(g);
 		bSettings.draw(g);
 		bQuit.draw(g);
 		
-	}
-
-	private void importImg() {
-		InputStream is = getClass().getResourceAsStream("/sprite.png");
-		
-		// try to import the image
-		try {
-			img = ImageIO.read(is);
-		} catch (IOException e) {
-			//if it goes wrong then it will print an error message
-			e.printStackTrace();
-		}
-	}
-	
-	private void loadSprites() {
-		for(int y = 0; y < 10; y++) {
-			for(int x = 0; x < 10; x++) {
-				sprites.add(img.getSubimage(x * 32, y * 32, 32, 32));
-			}
-		}	
-	}
-	
-	private int getRndInt() {
-		return random.nextInt(100);
 	}
 
 	@Override
 	public void mouseClicked(int x, int y) {
 		if(bPlaying.getBounds().contains(x, y)) {
 			SetGameState(PLAYING);
+		}
+		else if (bEdit.getBounds().contains(x, y)) {
+			SetGameState(EDITOR);
 		}
 		else if (bSettings.getBounds().contains(x, y)) {
 			SetGameState(SETTINGS);
@@ -94,11 +61,15 @@ public class Menu extends GameScene implements SceneMethods {
 	@Override
 	public void mouseMoved(int x, int y) {
 		bPlaying.setMouseOver(false);
+		bEdit.setMouseOver(false);
 		bSettings.setMouseOver(false);
 		bQuit.setMouseOver(false);
 
 		if (bPlaying.getBounds().contains(x, y)) {
 			bPlaying.setMouseOver(true);
+		}
+		else if (bEdit.getBounds().contains(x, y)) {
+			bEdit.setMouseOver(true);
 		}
 		else if (bSettings.getBounds().contains(x, y)) {
 			bSettings.setMouseOver(true);
@@ -114,6 +85,9 @@ public class Menu extends GameScene implements SceneMethods {
 		if(bPlaying.getBounds().contains(x, y)) {
 			bPlaying.setMousePressed(true);
 		}
+		if (bEdit.getBounds().contains(x, y)) {
+			bEdit.setMousePressed(true);
+		}
 		else if(bSettings.getBounds().contains(x, y)) {
 			bSettings.setMousePressed(true);
 		}
@@ -125,6 +99,7 @@ public class Menu extends GameScene implements SceneMethods {
 	@Override
 	public void mouseReleased(int x, int y) {
 		bPlaying.resetBool();
+		bEdit.resetBool();
 		bSettings.resetBool();
 		bQuit.resetBool();
 		
