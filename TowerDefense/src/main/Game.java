@@ -1,13 +1,10 @@
 package main;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-import inputs.KeyboardInputs;
-import inputs.MouseInputs;
+import handlers.GridHandler;
+import helperMethods.LoadSave;
+import scenes.Editor;
 import scenes.Menu;
 import scenes.Playing;
 import scenes.Settings;
@@ -21,18 +18,20 @@ public class Game extends JFrame implements Runnable {
 	private final double FPSCap = 120.0;
 	private final double UPSCap = 60.0;
 	
-	
-	
 	// Classes
 	private Render render;
 	private Menu menu;
 	private Playing playing;
 	private Settings settings;
+	private Editor editor;
+	
+	private GridHandler gridHandler;
 	
 	// The game window
 	public Game() {
 		
 		initClasses();
+		createDefaultWorld();
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -45,13 +44,24 @@ public class Game extends JFrame implements Runnable {
 		
 	}
 	
+	private void createDefaultWorld() {
+		int[] arr = new int[400];
+		for(int i = 0; i < arr.length; i++) {
+			arr[i] = 0;
+		}
+		
+		LoadSave.CreateWorld("new_world", arr);
+	}
+	
 	private void initClasses() {
+		gridHandler = new GridHandler();
 		
 		render = new Render(this);
 		gameScreen = new GameScreen(this);
 		menu = new Menu(this);
 		playing = new Playing(this);
 		settings = new Settings(this);
+		editor = new Editor(this);
 		
 	}
 	
@@ -72,7 +82,7 @@ public class Game extends JFrame implements Runnable {
 	public static void main(String[] args) {
 		
 		Game game = new Game();
-		game.gameScreen.initInputs();;
+		game.gameScreen.initInputs();
 		game.start();
 		
 	}
@@ -121,6 +131,7 @@ public class Game extends JFrame implements Runnable {
 		}
 	}
 	
+	
 	// Getter Setter
 	public Render getRender() {
 		return render;
@@ -138,5 +149,12 @@ public class Game extends JFrame implements Runnable {
 		return settings;
 	}
 
+	public Editor getEditor() {
+		return editor;
+	}
+	
+	public GridHandler getGridHandler() {
+		return gridHandler;
+	}
 	
 }
