@@ -5,13 +5,12 @@ import java.awt.image.BufferedImage;
 public class Grid {
 	
 	private BufferedImage sprite;
-	private int id;
-	private String name;
+	private int id, gridType;
 	
-	public Grid(BufferedImage sprite, int id, String name) {
-		this.sprite = sprite;
+	public Grid(BufferedImage bufferedImages, int id, int gridType) {
+		this.sprite = bufferedImages;
 		this.id = id;
-		this.name = name;
+		this.gridType = gridType; 
 	}
 	
 	// Getter
@@ -19,14 +18,12 @@ public class Grid {
 		return sprite;
 	}
 	
+	public int getGridType() {
+		return gridType;
+	}
+	
 	public int getId() {
 		return id;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-
 	
 }
