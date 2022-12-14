@@ -74,8 +74,20 @@ public class Game extends JFrame implements Runnable {
 	}
 
 	private void updateGame() {
+		switch(GameStates.gameState) {
+		case EDITOR:
+			break;
+		case MENU:
+			break;
+		case PLAYING:
+			playing.update();
+			break;
+		case SETTINGS:
+			break;
+		default:
+			break;
 		
-		//System.out.println("Game Updated.");
+		}
 	}
 
 	// main function
