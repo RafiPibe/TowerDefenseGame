@@ -1,6 +1,7 @@
 package scenes;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 import guii.ToolBar;
@@ -101,7 +102,9 @@ public class Editor extends GameScene implements SceneMethods {
 
 	@Override
 	public void mousePressed(int x, int y) {
-		
+		if(y >= 640) {
+			toolbar.mousePressed(x, y);
+		}
 	}
 
 	@Override
@@ -111,11 +114,16 @@ public class Editor extends GameScene implements SceneMethods {
 
 	@Override
 	public void mouseDragged(int x, int y) {
-if (y >= 640) {
+		if (y >= 640) {
 			
 		} else {
 			changeGrid(x, y);
 		}
+	}
+	
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_R)
+			toolbar.rotateSprite();
 	}
 
 }
