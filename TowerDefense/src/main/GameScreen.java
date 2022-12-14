@@ -2,10 +2,6 @@ package main;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Random;
-
 import javax.swing.JPanel;
 
 import inputs.KeyboardInputs;
@@ -28,8 +24,9 @@ public class GameScreen extends JPanel {
 	
 	public void initInputs() {
 		
-		keyboardInputs = new KeyboardInputs();
-		mouseInputs = new MouseInputs();
+		mouseInputs = new MouseInputs(game);
+		keyboardInputs = new KeyboardInputs(game);
+
 		
 		addMouseListener(mouseInputs);
 		addMouseMotionListener(mouseInputs);
@@ -42,7 +39,7 @@ public class GameScreen extends JPanel {
 	
 	private void setPanelSize() {
 		
-		size = new Dimension(640, 640);
+		size = new Dimension(640, 740);
 		setMinimumSize(size);
 		setPreferredSize(size);
 		setMaximumSize(size);
