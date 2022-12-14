@@ -14,78 +14,66 @@ In my final project in Object Oriented Programming, I’m attempting to make a g
 <h3>List of mandatory OOP implementation</h3>
 </p>
 ✅ <b>Casting / Conversion</b><br> 
-    (src\guii\BottomBar.java)<br>
-    Line 40<br>
+    https://github.com/RafiPibe/TowerDefenseGame/blob/8e989974ec44a97350a9bb9359007c0434f02b6f/TowerDefense/src/guii/ToolBar.java#L51
     <br>
   
 ✅ <b>Constructor</b><br> 
-    (src\main\Game.java)<br>
-    Line 32<br>
-    (src\main\GameScreen.java)<br>
-    Line 22<br>
-    etc.<br>
+    https://github.com/RafiPibe/TowerDefenseGame/blob/8e989974ec44a97350a9bb9359007c0434f02b6f/TowerDefense/src/main/Game.java#L33-L43
+    https://github.com/RafiPibe/TowerDefenseGame/blob/8e989974ec44a97350a9bb9359007c0434f02b6f/TowerDefense/src/main/GameScreen.java#L27-L36
     <br>
     
 ✅ <b>Overloading</b><br>
-    (src\guii\Buttons.java)<br>
-    Line 15-25 and Line 28-37<br>
+    https://github.com/RafiPibe/TowerDefenseGame/blob/8e989974ec44a97350a9bb9359007c0434f02b6f/TowerDefense/src/guii/Buttons.java#L15
+    and
+    https://github.com/RafiPibe/TowerDefenseGame/blob/8e989974ec44a97350a9bb9359007c0434f02b6f/TowerDefense/src/guii/Buttons.java#L28
     <br>
     
 ✅ <b>Overriding</b><br>
-    (src\guii\Buttons.java)<br>
-    Line 15-25 and Line 28-37<br>
+    https://github.com/RafiPibe/TowerDefenseGame/blob/8e989974ec44a97350a9bb9359007c0434f02b6f/TowerDefense/src/guii/Buttons.java#L14-L25
+    and
+    https://github.com/RafiPibe/TowerDefenseGame/blob/8e989974ec44a97350a9bb9359007c0434f02b6f/TowerDefense/src/guii/Buttons.java#L28-L37
     <br>
     
 ✅ <b>Encapsulation</b><br> 
-    (src\obj\Grid.java)<br>
-    Line 11-28<br>
+    https://github.com/RafiPibe/TowerDefenseGame/blob/8e989974ec44a97350a9bb9359007c0434f02b6f/TowerDefense/src/obj/Grid.java#L10-L27
     <br>
     
 ✅ <b>Inheritance</b><br>
-    (src\scenes\Playing.java)<br>
-    Line 15<br>
-    (src\scenes\Menu.java)<br>
-    Line 16<br>
-    etc.<br>
+    https://github.com/RafiPibe/TowerDefenseGame/blob/8e989974ec44a97350a9bb9359007c0434f02b6f/TowerDefense/src/scenes/Playing.java#L11
     <br>
     
 ✅ <b>Polymorphism</b><br>
-    (src\handlers\GridHandler.java)<br>
-    Line 23-25<br>
+    https://github.com/RafiPibe/TowerDefenseGame/blob/8e989974ec44a97350a9bb9359007c0434f02b6f/TowerDefense/src/handlers/GridHandler.java#L58-L59
     <br>
     
 ✅ <b>ArrayList</b><br> 
-    (src\guii\BottomBar.java)<br>
-    Line 21<br>
+    https://github.com/RafiPibe/TowerDefenseGame/blob/8e989974ec44a97350a9bb9359007c0434f02b6f/TowerDefense/src/handlers/GridHandler.java#L42
     <br>
     
 ✅ Exception Handing<br>
-    (src\helperMethods\LoadSave.java)<br>
-    Line 18-31<br>
-    Line 34-32<br>
-    etc.<br>
+    https://github.com/RafiPibe/TowerDefenseGame/blob/8e989974ec44a97350a9bb9359007c0434f02b6f/TowerDefense/src/helperMethods/LoadSave.java#L87-L97
     <br>
     
-✅ <b>GUI</b> (mainly the gui / scenes are made here)<br>
+✅ <b>GUI</b> (mainly the gui / scenes are made in scenes package)<br>
     (src\scenes)<br>
     <br>
-    
-• Abstract Class<br>
-<br>
 
 ✅ Generics<br>
-    (src\handlers\UtilitiesHandler.java)<br>
-    Line 6<br>
+    https://github.com/RafiPibe/TowerDefenseGame/blob/8e989974ec44a97350a9bb9359007c0434f02b6f/TowerDefense/src/helperMethods/LoadSave.java#L86
+    the "Integer" counts as Generics
 <br>
 
-• Collection<br>
+✅ Collection<br>
+    https://github.com/RafiPibe/TowerDefenseGame/blob/8e989974ec44a97350a9bb9359007c0434f02b6f/TowerDefense/src/handlers/GridHandler.java#L44-L48
 <br>
 
 ✅ <b>Input Output</b><br> 
-    (src\inputs\MouseInputs.java)<br>
-    Line 18-40, Line 42-58, etc.<br>
+    https://github.com/RafiPibe/TowerDefenseGame/blob/8e989974ec44a97350a9bb9359007c0434f02b6f/TowerDefense/src/helperMethods/LoadSave.java#L62-L82
+    https://github.com/RafiPibe/TowerDefenseGame/blob/8e989974ec44a97350a9bb9359007c0434f02b6f/TowerDefense/src/scenes/Playing.java#L69-L76
     <br>
-    
 <p>
+
+<h3> References </h3>
+https://www.youtube.com/watch?v=kclnyiXmY7Q&list=PL4rzdwizLaxb0-TajNIp5DOoT_PAxhx0T&index=1
 
   
