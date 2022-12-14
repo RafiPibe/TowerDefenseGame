@@ -1,89 +1,112 @@
 package scenes;
 
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
-import guii.ActionBar;
-import helperMethods.LoadSave;
+import guii.Buttons;
 import main.Game;
+import static main.GameStates.*;
 
-public class Playing extends GameScene implements SceneMethods {
-
-	private int[][] world;
-	private ActionBar bottomBar;
-	private int mouseX, mouseY;
+public class Menu extends GameScene implements SceneMethods {
 	
-	public Playing(Game game) {
+	private Buttons bPlaying, bEdit, bSettings, bQuit;
+	
+	public Menu(Game game) {
 		super(game);
-		loadDefaultWorld();
-		
-		bottomBar = new ActionBar(0, 640, 640, 100, this);
-		
+		initButtons();
 	}
 
-	private void loadDefaultWorld() {
-		world = LoadSave.GetWorldData("new_world");
+	private void initButtons() {
+		
+		int widthButton = 150;
+		int heightButton = widthButton / 3;
+		int x = 640 / 2 - widthButton / 2;
+		int y = 150;
+		int ySpace = 100;
+		
+		bPlaying = new Buttons("Play", x, y, widthButton, heightButton);
+		bEdit = new Buttons("Edit", x, y + ySpace, widthButton, heightButton);
+		bSettings = new Buttons("Settings", x, y + ySpace * 2, widthButton, heightButton);
+		bQuit = new Buttons("Quit", x, y + ySpace * 3, widthButton, heightButton);
 	}
 
 	@Override
 	public void render(Graphics g) {
-		drawWorld(g);
-		bottomBar.draw(g);
+		drawButtons(g);
+	}
+
+	private void drawButtons(Graphics g) {
+		bPlaying.draw(g);
+		bEdit.draw(g);
+		bSettings.draw(g);
+		bQuit.draw(g);
 		
 	}
-	
-	private void drawWorld(Graphics g) {
-		for(int y = 0; y < world.length; y++) {
-			for(int x = 0; x < world[y].length; x++) {
-				int id = world[y][x];
-				g.drawImage(getSprite(id), x * 32, y * 32, null);
-			}
-		}
-	}
-	
-	private BufferedImage getSprite(int spriteID) {
-		return game.getGridHandler().getSprite(spriteID);
-	}
-	
-	
-	// Mouse Inputs
+
 	@Override
 	public void mouseClicked(int x, int y) {
-		if(y >= 640) {
-			bottomBar.mouseClicked(x, y);
+		if(bPlaying.getBounds().contains(x, y)) {
+			SetGameState(PLAYING);
+		}
+		else if (bEdit.getBounds().contains(x, y)) {
+			SetGameState(EDITOR);
+		}
+		else if (bSettings.getBounds().contains(x, y)) {
+			SetGameState(SETTINGS);
+		}
+		else if (bQuit.getBounds().contains(x, y)) {
+			System.exit(0);
 		}
 	}
 
 	@Override
 	public void mouseMoved(int x, int y) {
-		if(y >= 640) {
-			bottomBar.mouseMoved(x, y);
-		} else {
-			mouseX = (x / 32) * 32;
-			mouseY = (y / 32) * 32;
+		bPlaying.setMouseOver(false);
+		bEdit.setMouseOver(false);
+		bSettings.setMouseOver(false);
+		bQuit.setMouseOver(false);
+
+		if (bPlaying.getBounds().contains(x, y)) {
+			bPlaying.setMouseOver(true);
+		}
+		else if (bEdit.getBounds().contains(x, y)) {
+			bEdit.setMouseOver(true);
+		}
+		else if (bSettings.getBounds().contains(x, y)) {
+			bSettings.setMouseOver(true);
+		}	
+		else if (bQuit.getBounds().contains(x, y)) {
+			bQuit.setMouseOver(true);
 		}
 	}
-	
+
 	@Override
 	public void mousePressed(int x, int y) {
-		if(y >= 640) {
-			bottomBar.mousePressed(x, y);
+		
+		if(bPlaying.getBounds().contains(x, y)) {
+			bPlaying.setMousePressed(true);
+		}
+		if (bEdit.getBounds().contains(x, y)) {
+			bEdit.setMousePressed(true);
+		}
+		else if(bSettings.getBounds().contains(x, y)) {
+			bSettings.setMousePressed(true);
+		}
+		else if(bQuit.getBounds().contains(x, y)) {
+			bQuit.setMousePressed(true);
 		}
 	}
 
 	@Override
 	public void mouseReleased(int x, int y) {
-		bottomBar.mouseReleased(x, y);
+		bPlaying.resetBool();
+		bEdit.resetBool();
+		bSettings.resetBool();
+		bQuit.resetBool();
+		
 	}
-
-
 
 	@Override
 	public void mouseDragged(int x, int y) {
-	
-	}	
-	
-	public void setWorld(int[][] world) {
-		this.world = world;
+		
 	}
 }
