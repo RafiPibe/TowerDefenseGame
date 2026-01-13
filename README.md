@@ -1,7 +1,7 @@
-<h1>Tower Defense Game Thing (W.I.P)</h1>
+<h1>Tower Defense Game Thing (Deprecated)</h1>
 
 <h3> About </h3>
-<p>This is a Tower Defense game that I'm making for my final project in Object Oriented Programming.</p>
+<p>This is a Tower Defense game that I'm making for my final project in Object Oriented Programming. Though it is now abandoned and im not updating it anymore (sorry gang)</p>
 
 <h3>
 • Faraihan Rafi Adityawarman<br>
